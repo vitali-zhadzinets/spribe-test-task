@@ -1,0 +1,50 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: vitali.zhadzinets
+      comment: initial setup
+      changes:
+        - createTable:
+            tableName: currency
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(3)
+                  constraints:
+                    nullable: false
+                    unique: true
+        - createSequence:
+            sequenceName: currency_seq
+            startValue: 1
+            incrementBy: 1
+        - createTable:
+            tableName: rates
+            columns:
+              - column:
+                  name: currency_id
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: currency_name
+                  type: varchar(5)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: rate
+                  type: currency
+                  constraints:
+                    nullable: false
+        - addForeignKeyConstraint:
+            constraintName: fk_rates_currency
+            baseTableName: rates
+            baseColumnNames: currency_id
+            referencedTableName: currency
+            referencedColumnNames: id

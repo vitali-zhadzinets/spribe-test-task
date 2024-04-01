@@ -1,0 +1,27 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;MODE=PostgreSQL
+    username: myuser
+    password: secret
+    driver-class-name: org.h2.Driver
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.H2Dialect
+  liquibase:
+    change-log: classpath:/db/changelog/changelog-master.yaml
+
+application:
+  currencybeacon:
+    baseUrl: https://api.currencybeacon.com/v1/
+    latestPath: latest
+    currencyParam: base
+    apiKeyParam: api_key
+    apiKey: hNDoj6el4y7rbcIRlb6aEupa9D3Qwt8a
+  defaultCurrency: USD
+  scheduling:
+    cronExpression: "0 0 * * * *" #at the start of every hour

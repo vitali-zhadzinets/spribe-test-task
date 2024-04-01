@@ -1,0 +1,29 @@
+spring:
+  application:
+    name: test
+  datasource:
+    url: jdbc:postgresql://localhost:5432/currency
+    username: myuser
+    password: secret
+    driver-class-name: org.postgresql.Driver
+    jpa:
+      hibernate:
+        ddl-auto: none
+      show-sql: true
+      properties:
+        hibernate:
+          format_sql: true
+          dialect: org.hibernate.dialect.PostgreSQLDialect
+  liquibase:
+    change-log: classpath:/db/changelog/changelog-master.yaml
+
+application:
+  currencybeacon:
+    baseUrl: https://api.currencybeacon.com/v1/
+    latestPath: latest
+    currencyParam: base
+    apiKeyParam: api_key
+    apiKey: hNDoj6el4y7rbcIRlb6aEupa9D3Qwt8a #up to 5000 requests for free subscription level, login:cageda1918@glaslack.com password: 321ewqqwe
+  defaultCurrency: USD
+  scheduling:
+    cronExpression: "0 0 * * * *" #at the start of every hour
